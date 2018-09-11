@@ -31,9 +31,8 @@ def any_change(query_result):
 		last_query = query_result
 		# send email
 		send_email(query_result[0])
-		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-		print "something different"
-		print query_result[0]
+		# print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+		# print query_result[0]
 	return
 
 def send_email(msg):
@@ -43,14 +42,13 @@ def send_email(msg):
 	mail_pass="shihao1992"   #口令
 
 	sender = 'shihao1024@163.com'
-	receivers = 'shihao1024@163.com'  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+	receivers = 'marygmd123@163.com'  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
 	message = MIMEText('http://ndes.csrc.gov.cn/alappl/home/gongshi', 'plain', 'utf-8')
 	message['From'] = "shihao<shihao1024@163.com>"
 	message['To'] =  "guomengdi<marygmd123@163.com>"
 
 	subject = msg
-	print type(msg)
 	message['Subject'] = Header(subject)
 
 	try:
