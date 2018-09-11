@@ -56,9 +56,9 @@ def send_email(msg):
 		smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
 		smtpObj.login(mail_user,mail_pass)
 		smtpObj.sendmail(sender, receivers, message.as_string())
-		print u"邮件发送成功"
+		print "OK"
 	except smtplib.SMTPException:
-		print u"Error: 无法发送邮件"
+		print "NO"
 	return
 	
 # 网页查询函数，每20s查询一次
