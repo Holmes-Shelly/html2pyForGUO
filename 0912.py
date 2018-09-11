@@ -41,7 +41,7 @@ def send_email(msg_tuple):
 	mail_pass="shihao1992"   #口令
 
 	sender = 'shihao1024@163.com'
-	receivers = 'shihao1024@163.com'  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
+	receivers = 'marygmd123@163.com'  # 接收邮件
 
 	message = MIMEText('http://ndes.csrc.gov.cn/alappl/home/gongshi'+'\n'+'\n'.join(msg_tuple), 'plain', 'utf-8')
 	message['From'] = "shihao<shihao1024@163.com>"
