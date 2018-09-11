@@ -1,7 +1,5 @@
 #-*- coding:utf-8 -*-
 import requests
-import sys
-import json
 import re
 import time
 import smtplib
