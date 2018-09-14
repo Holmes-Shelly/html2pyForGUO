@@ -17,7 +17,7 @@ url_list = [
 },
 {'name':'tianjin', 
 'ok_url':'zjhpublicoftj/3284/3566/index_1008.htm', 
-'no_url':'tianjin/xzcf/',
+# 'no_url':'tianjin/xzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
@@ -35,7 +35,7 @@ url_list = [
 },
 {'name':'neimenggu', 
 'ok_url':'zjhpublicofnmg/3284/3566/index_1052.htm', 
-'no_url':'neimenggu/nmgxzcf/',
+# 'no_url':'neimenggu/nmgxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
@@ -89,7 +89,7 @@ url_list = [
 },
 {'name':'jiangxi', 
 'ok_url':'zjhpublicofjx/3284/3566/index_964.htm', 
-'no_url':'jiangxi/jxxzcf/',
+# 'no_url':'jiangxi/jxxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
@@ -125,7 +125,7 @@ url_list = [
 },
 {'name':'hainan', 
 'ok_url':'zjhpublicofhan/3284/3566/index_1162.htm', 
-'no_url':'hainan/hnjxzcf/',
+# 'no_url':'hainan/hnjxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
@@ -143,25 +143,25 @@ url_list = [
 },
 {'name':'guizhou', 
 'ok_url':'zjhpublicofgz/3284/3566/index_1184.htm', 
-'no_url':'guizhou/gzxzcf/',
+# 'no_url':'guizhou/gzxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
 {'name':'xizang', 
 'ok_url':'zjhpublicofxz/3284/3566/index_1206.htm', 
-'no_url':'xizang/xzxzcf/',
+# 'no_url':'xizang/xzxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
 {'name':'qinghai', 
 'ok_url':'zjhpublicofqh/3284/3566/index_931.htm', 
-'no_url':'qinghai/qhxzcf/',
+# 'no_url':'qinghai/qhxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
 {'name':'xinjiang', 
 'ok_url':'zjhpublicofxj/3284/3566/index_909.htm', 
-'no_url':'xinjiang/xjxzcf/',
+# 'no_url':'xinjiang/xjxzcf/',
 'ok_last_query':(),
 'no_last_query':(),
 },
@@ -268,8 +268,12 @@ def ok_html_analyze(content):
 
 # 对惩罚网页内容进行正则分析的函数	
 def no_html_analyze(content):
-	res = r'<.*?blank.*?>(.*?)<.*?>'
-	ans = re.findall(res, content, re.I|re.S|re.M)
+	res = r'<.*?_(\d+)\.htm.*?blank.*?>(.*?)<.*?>'
+	ans0 = re.findall(res, content, re.I|re.S|re.M)
+	print len(ans0)
+	ans = []
+	for re_tuple in ans0:
+		ans.append(''.join(re_tuple))
 	# file_write('\n'.join(ans))
 	# file_write('\n')
 	return tuple(ans)
