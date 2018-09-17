@@ -271,7 +271,6 @@ def ok_html_analyze(content):
 def no_html_analyze(content):
 	res = r'<.*?_(\d+)\.htm.*?blank.*?>(.*?)<.*?>'
 	ans0 = re.findall(res, content, re.I|re.S|re.M)
-	print len(ans0)
 	ans = []
 	for re_tuple in ans0:
 		ans.append(''.join(re_tuple))
