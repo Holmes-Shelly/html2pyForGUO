@@ -231,15 +231,20 @@ url_list = [
 # 获取审批网页内容
 def ok_html_query():
 	for province_index in range(len(url_list)):
+		# 获取网页信息
 		ok_html_response = requests.get(url + url_list[province_index]['ok_url']).content.decode('utf-8')
 		ok_this_query = ok_html_analyze(ok_html_response)
-		ok_diff_tuple = any_change(ok_this_query, url_list[province_index]['ok_last_query'])
+		# get update
+		ok_diff_tuple = tuple(set(ok_this_query).difference(set(url_list[province_index]['ok_last_query'])))
 		if len(ok_diff_tuple) & len(url_list[province_index]['ok_last_query']):
 			print "detect change in area_ok"
 			file_write('ok_last_query is')
 			file_write('\n'.join(url_list[province_index]['ok_last_query']))
 			file_write('ok_this_query is')
 			file_write('\n'.join(ok_this_query))
+			file_write('ok_diff_tuple is')
+			file_write('\n'.join(ok_diff_tuple))
+			# 发送邮件
 			send_email(ok_diff_tuple, url_list[province_index]['ok_url'])
 		url_list[province_index]['ok_last_query'] = ok_this_query
 		time.sleep(120)
@@ -248,15 +253,20 @@ def ok_html_query():
 # 获取惩罚网页内容
 def no_html_query():
 	for province_index in range(len(url_list)-13):
+		# 获取网页信息
 		no_html_response = requests.get(url + url_list[province_index]['no_url']).content.decode('utf-8')
 		no_this_query = no_html_analyze(no_html_response)
-		no_diff_tuple = any_change(no_this_query, url_list[province_index]['no_last_query'])
+		# get update
+		no_diff_tuple = tuple(set(no_this_query).difference(set(url_list[province_index]['no_last_query'])))
 		if len(no_diff_tuple) & len(url_list[province_index]['no_last_query']):
 			print "detect change in area_no"
 			file_write('no_last_query is')
 			file_write('\n'.join(url_list[province_index]['no_last_query']))
 			file_write('no_this_query is')
 			file_write('\n'.join(no_this_query))
+			file_write('no_diff_tuple is')
+			file_write('\n'.join(no_diff_tuple))
+			# 发送邮件
 			send_email(no_diff_tuple, url_list[province_index]['no_url'])
 		url_list[province_index]['no_last_query'] = no_this_query
 		time.sleep(120)
@@ -283,13 +293,6 @@ def no_html_analyze(content):
 	# file_write('\n'.join(ans))
 	# file_write('\n')
 	return tuple(ans)
-
-# 与上次查询结果做对比
-def any_change(this_query, last_query):
-	diff_tuple = tuple(set(this_query).difference(set(last_query)))
-	file_write('any_change is')
-	file_write('\n'.join(diff_tuple))
-	return diff_tuple
 
 def send_email(msg_tuple, province_url):
 	# 第三方 SMTP 服务
