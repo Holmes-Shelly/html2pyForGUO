@@ -235,9 +235,12 @@ def ok_html_query():
 		ok_this_query = ok_html_analyze(ok_html_response)
 		ok_diff_tuple = any_change(ok_this_query, url_list[province_index]['ok_last_query'])
 		if len(ok_diff_tuple) & len(url_list[province_index]['ok_last_query']):
-			# print "detect change in area_ok"
+			print "detect change in area_ok"
+			file_write('ok_last_query is')
+			file_write('\n'.join(url_list[province_index]['ok_last_query']))
+			file_write('ok_this_query is')
+			file_write('\n'.join(ok_this_query))
 			send_email(ok_diff_tuple, url_list[province_index]['ok_url'])
-		# print "no change happend in area_ok"
 		url_list[province_index]['ok_last_query'] = ok_this_query
 		time.sleep(120)
 	return
@@ -249,9 +252,12 @@ def no_html_query():
 		no_this_query = no_html_analyze(no_html_response)
 		no_diff_tuple = any_change(no_this_query, url_list[province_index]['no_last_query'])
 		if len(no_diff_tuple) & len(url_list[province_index]['no_last_query']):
-			# print "detect change in area_no"
+			print "detect change in area_no"
+			file_write('no_last_query is')
+			file_write('\n'.join(url_list[province_index]['no_last_query']))
+			file_write('no_this_query is')
+			file_write('\n'.join(no_this_query))
 			send_email(no_diff_tuple, url_list[province_index]['no_url'])
-		# print "no change happend in area_no"
 		url_list[province_index]['no_last_query'] = no_this_query
 		time.sleep(120)
 	return
@@ -281,7 +287,8 @@ def no_html_analyze(content):
 # 与上次查询结果做对比
 def any_change(this_query, last_query):
 	diff_tuple = tuple(set(this_query).difference(set(last_query)))
-	# file_write('\n'.join(diff_tuple))
+	file_write('any_change is')
+	file_write('\n'.join(diff_tuple))
 	return diff_tuple
 
 def send_email(msg_tuple, province_url):
@@ -320,12 +327,12 @@ def query_cycle():
 		print cycle_time
 	return
 
-# def file_write(content):
-	# f = open('test.txt', 'a')
-	# f.write(content.encode('utf-8'))
-	# f.write('\n')
-	# f.close
-	# return
+def file_write(content):
+	f = open('test0918.txt', 'a')
+	f.write(content.encode('utf-8'))
+	f.write('\n')
+	f.close
+	return
 	
 # 开始查询	
 query_cycle()
