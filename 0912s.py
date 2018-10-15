@@ -301,7 +301,7 @@ def send_email(msg_tuple, province_url):
 	mail_pass="shihao1992"   #口令
 
 	sender = 'shihao1024@163.com'
-	receivers = 'shihao1024@163.com'  # 接收邮件
+	receivers = ['marygmd123@163.com', 'shihao1024@163.com']  # 接收邮件
 
 	message = MIMEText(url+province_url+'\n'+'\n'.join(msg_tuple), 'plain', 'utf-8')
 	message['From'] = "shihao<shihao1024@163.com>"
