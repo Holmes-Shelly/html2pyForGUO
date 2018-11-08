@@ -58,10 +58,15 @@ def send_email(msg_tuple):
 		print "send unsuccessfully"
 	return
 	
-# 网页查询函数，每20s查询一次
+# 网页查询函数，每600s查询一次
 def query_cycle():
 	while(1):
-		html_query()
+		try:
+			html_query()
+		except:
+			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+			print "Something went wrong, please check it."
+			send_email(("Network wrong.",))
 		time.sleep(600)
 	return
 

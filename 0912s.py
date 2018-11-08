@@ -324,8 +324,13 @@ def send_email(msg_tuple, province_url):
 def query_cycle():
 	cycle_time = 0
 	while(1):
-		ok_html_query()
-		no_html_query()
+		try:
+			ok_html_query()
+			no_html_query()
+		except:
+			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+			print "Something went wrong, please check it."
+			send_email(("Network wrong.",))
 		cycle_time += 1
 		print cycle_time
 	return
