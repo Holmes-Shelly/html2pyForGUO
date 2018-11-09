@@ -330,7 +330,7 @@ def query_cycle():
 		except:
 			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 			print "Something went wrong, please check it."
-			send_email(("Network wrong.",))
+			send_email(("Network wrong.",),"")
 		cycle_time += 1
 		print cycle_time
 	return
