@@ -63,10 +63,9 @@ def query_cycle():
 	while(1):
 		try:
 			html_query()
-		except:
+		except requests.exceptions.ConnectionError, ErrorAlert:
 			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-			print "Something went wrong, please check it."
-			send_email(("Network wrong.",))
+			print ErrorAlert
 		time.sleep(600)
 	return
 

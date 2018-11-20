@@ -238,12 +238,12 @@ def ok_html_query():
 		ok_diff_tuple = tuple(set(ok_this_query).difference(set(url_list[province_index]['ok_last_query'])))
 		if len(ok_diff_tuple) & len(url_list[province_index]['ok_last_query']):
 			print "detect change in area_ok"
-			file_write('ok_last_query is')
-			file_write('\n'.join(url_list[province_index]['ok_last_query']))
-			file_write('ok_this_query is')
-			file_write('\n'.join(ok_this_query))
-			file_write('ok_diff_tuple is')
-			file_write('\n'.join(ok_diff_tuple))
+			# file_write('ok_last_query is')
+			# file_write('\n'.join(url_list[province_index]['ok_last_query']))
+			# file_write('ok_this_query is')
+			# file_write('\n'.join(ok_this_query))
+			# file_write('ok_diff_tuple is')
+			# file_write('\n'.join(ok_diff_tuple))
 			# 发送邮件
 			send_email(ok_diff_tuple, url_list[province_index]['ok_url'])
 		url_list[province_index]['ok_last_query'] = ok_this_query
@@ -260,12 +260,12 @@ def no_html_query():
 		no_diff_tuple = tuple(set(no_this_query).difference(set(url_list[province_index]['no_last_query'])))
 		if len(no_diff_tuple) & len(url_list[province_index]['no_last_query']):
 			print "detect change in area_no"
-			file_write('no_last_query is')
-			file_write('\n'.join(url_list[province_index]['no_last_query']))
-			file_write('no_this_query is')
-			file_write('\n'.join(no_this_query))
-			file_write('no_diff_tuple is')
-			file_write('\n'.join(no_diff_tuple))
+			# file_write('no_last_query is')
+			# file_write('\n'.join(url_list[province_index]['no_last_query']))
+			# file_write('no_this_query is')
+			# file_write('\n'.join(no_this_query))
+			# file_write('no_diff_tuple is')
+			# file_write('\n'.join(no_diff_tuple))
 			# 发送邮件
 			send_email(no_diff_tuple, url_list[province_index]['no_url'])
 		url_list[province_index]['no_last_query'] = no_this_query
@@ -327,10 +327,9 @@ def query_cycle():
 		try:
 			ok_html_query()
 			no_html_query()
-		except:
+		except requests.exceptions.ConnectionError, ErrorAlert:
 			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-			print "Something went wrong, please check it."
-			send_email(("Network wrong.",),"")
+			print ErrorAlert
 		cycle_time += 1
 		print cycle_time
 	return
