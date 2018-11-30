@@ -8,6 +8,7 @@ from email.header import Header
 
 url = 'http://ndes.csrc.gov.cn/alappl/home/volunteerLift?edCde=300009'
 last_query = ()
+key_word = u'基金募集'
 
 # main function
 def html_query():
@@ -20,8 +21,10 @@ def html_query():
 	diff_tuple = tuple(set(this_query).difference(set(last_query)))
 	if len(diff_tuple) & len(last_query):
 		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-		print len(diff_tuple), " messages are updated"
-		send_email(diff_tuple)
+		print len(diff_tuple), " messages are updated."
+		key_query = find_key(diff_tuple)
+		print "Find", len(key_query), "important message."
+		send_email(diff_tuple, key_query)
 	last_query = this_query
 	return
 
@@ -29,10 +32,9 @@ def html_query():
 def html_analyze(content):
 	res = r'<.*?titleshow.*?>(.*?)<.*?>'
 	ans = re.findall(res, content, re.I|re.S|re.M)
-	# print len(ans)
 	return tuple(ans)
-
-def send_email(msg_tuple):
+	
+def send_email(html_tuple, msg_tuple):
 	# 第三方 SMTP 服务
 	mail_host="smtp.163.com"  #设置服务器
 	mail_user="shihao1024@163.com"   #用户名
@@ -40,12 +42,16 @@ def send_email(msg_tuple):
 
 	sender = 'shihao1024@163.com'
 	receivers = ['marygmd123@163.com', 'shihao1024@163.com']  # 接收邮件
-
-	message = MIMEText('http://ndes.csrc.gov.cn/alappl/home/gongshi'+'\n'+'\n'.join(msg_tuple), 'plain', 'utf-8')
+	subject = "csrc.gov.cn: "+str(len(html_tuple))+" updated, "+str(len(msg_tuple))+" important."
+	email_content = 'http://ndes.csrc.gov.cn/alappl/home/gongshi'
+	content_row = 0
+	for content in msg_tuple:
+		content_row += 1
+		email_content = email_content + '\n' + str(content_row) + '. ' + content
+	
+	message = MIMEText(email_content, 'plain', 'utf-8')
 	message['From'] = "shihao<shihao1024@163.com>"
 	message['To'] =  "guomengdi<marygmd123@163.com>"
-
-	subject = str(len(msg_tuple))+" messages are updated"
 	message['Subject'] = Header(subject)
 
 	try:
@@ -57,6 +63,15 @@ def send_email(msg_tuple):
 	except smtplib.SMTPException:
 		print "send unsuccessfully"
 	return
+
+# 分析是否含有“基金募集”
+def find_key(diff_tuple):
+	key_query = []
+	for query_content in diff_tuple:
+		if not re.search(key_word, query_content):
+			key_query.append(query_content)
+			print query_content
+	return tuple(key_query)
 	
 # 网页查询函数，每600s查询一次
 def query_cycle():
