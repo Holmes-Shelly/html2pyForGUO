@@ -68,9 +68,10 @@ def send_email(html_tuple, msg_tuple):
 def find_key(diff_tuple):
 	key_query = []
 	for query_content in diff_tuple:
+		print type(query_content)
 		if not re.search(key_word, query_content):
 			key_query.append(query_content)
-			print query_content
+			print 'find', type(query_content)
 	return tuple(key_query)
 	
 # 网页查询函数，每600s查询一次
