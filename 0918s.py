@@ -19,7 +19,7 @@ def html_query():
 	# 与上次查询进行对比，是否有更新
 	global last_query
 	diff_tuple = tuple(set(this_query).difference(set(last_query)))
-	if len(diff_tuple) & len(last_query):
+	if len(diff_tuple) and len(last_query):
 		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 		print len(diff_tuple), " messages are updated."
 		key_query = find_key(diff_tuple)
@@ -83,7 +83,7 @@ def query_cycle():
 		time_delay = 3600
 		if time_day < 2:
 			time_delay = 43200
-		else if 11 < time_hour < 19:
+		elif 11 < time_hour < 19:
 			time_delay = 300
 
 		# 查询
