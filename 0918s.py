@@ -83,7 +83,7 @@ def query_cycle():
 		time_delay = 3600
 		if time_day < 2:
 			time_delay = 43200
-		elif 11 < time_hour < 19:
+		elif 11 < time_hour < 13 or 17 < time_hour < 19:
 			time_delay = 300
 
 		# 查询
