@@ -68,20 +68,32 @@ def send_email(html_tuple, msg_tuple):
 def find_key(diff_tuple):
 	key_query = []
 	for query_content in diff_tuple:
+		print query_content
 		if not re.search(key_word, query_content):
 			key_query.append(query_content)
 			print 'find', type(query_content)
 	return tuple(key_query)
 	
-# 网页查询函数，每600s查询一次
+# 网页查询函数
 def query_cycle():
 	while(1):
+		# 间隔时间设置
+		time_hour = int(time.strftime('%H',time.localtime(time.time())))
+		time_day = int(time.strftime('%w',time.localtime(time.time())))
+		time_delay = 3600
+		if time_day < 2:
+			time_delay = 43200
+		else if 11 < time_hour < 19:
+			time_delay = 300
+
+		# 查询
 		try:
+			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 			html_query()
 		except requests.exceptions.ConnectionError, ErrorAlert:
 			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
 			print ErrorAlert
-		time.sleep(600)
+		time.sleep(time_delay)
 	return
 
 # 开始查询	
