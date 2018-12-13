@@ -68,7 +68,6 @@ def send_email(html_tuple, msg_tuple):
 def find_key(diff_tuple):
 	key_query = []
 	for query_content in diff_tuple:
-		print query_content
 		if not re.search(key_word, query_content):
 			key_query.append(query_content)
 			print 'find', type(query_content)
@@ -83,8 +82,8 @@ def query_cycle():
 		time_delay = 3600
 		if time_day < 2:
 			time_delay = 43200
-		elif 10 < time_hour < 13 or 16 < time_hour < 19:
-			time_delay = 600
+		elif 11 < time_hour < 13 or 17 < time_hour < 19:
+			time_delay = 300
 
 		# 查询
 		try:
