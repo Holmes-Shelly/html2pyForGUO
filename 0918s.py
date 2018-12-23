@@ -79,8 +79,10 @@ def query_cycle():
 		# 间隔时间设置
 		time_hour = int(time.strftime('%H',time.localtime(time.time())))
 		time_day = int(time.strftime('%w',time.localtime(time.time())))
-		if time_day == 0 or time_day == 6:
-			time_delay = 28800
+		if time_hour == 21:
+			time_delay = 43200
+		elif time_day == 0 or time_day == 6:
+			time_delay = 3600
 		elif time_hour == 12 or time_hour == 18:
 			time_delay = 600
 		else:
