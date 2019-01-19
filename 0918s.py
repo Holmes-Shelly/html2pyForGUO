@@ -20,10 +20,9 @@ def html_query():
 	global last_query
 	diff_tuple = tuple(set(this_query).difference(set(last_query)))
 	if len(diff_tuple) and len(last_query):
-		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-		print len(diff_tuple), " messages are updated."
+		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(diff_tuple), "updated."
 		key_query = find_key(diff_tuple)
-		print "Find", len(key_query), "important message."
+		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(key_query), "important."
 		send_email(diff_tuple, key_query)
 	last_query = this_query
 	return
@@ -59,7 +58,7 @@ def send_email(html_tuple, msg_tuple):
 		smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
 		smtpObj.login(mail_user,mail_pass)
 		smtpObj.sendmail(sender, receivers, message.as_string())
-		print "send successfully"
+		# print "send successfully"
 	except smtplib.SMTPException:
 		print "send unsuccessfully"
 	return
@@ -70,7 +69,7 @@ def find_key(diff_tuple):
 	for query_content in diff_tuple:
 		if not re.search(key_word, query_content):
 			key_query.append(query_content)
-			print 'find', type(query_content)
+			# print 'find', type(query_content)
 	return tuple(key_query)
 	
 # 网页查询函数
