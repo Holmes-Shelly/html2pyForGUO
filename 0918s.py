@@ -40,7 +40,7 @@ def send_email(html_tuple, msg_tuple):
 	mail_pass="shihao1992"   #口令
 
 	sender = 'shihao1024@163.com'
-	receivers = ['marygmd123@163.com', 'shihao1024@163.com']  # 接收邮件
+	receivers = ['marygmd123@163.com', 'shihao1024@163.com', 'shihao06@gmail.com']  # 接收邮件
 	subject = "csrc.gov.cn: "+str(len(html_tuple))+" updated, "+str(len(msg_tuple))+" important."
 	email_content = 'http://ndes.csrc.gov.cn/alappl/home/gongshi'
 	content_row = 0
