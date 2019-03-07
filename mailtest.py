@@ -11,8 +11,8 @@ def send_email():
 
 	sender = 'shihao1024@163.com'
 	receivers = ['shihao1024@163.com', 'shihao06@gmail.com']  # 接收邮件
-	subject = "csrc.gov.cn: 2 important."
-	email_content = 'http://ndes.csrc.gov.cn/alappl/home/gongshi'
+	subject = "8 updated, 2 important."
+	email_content = ''
 	
 	message = MIMEText(email_content, 'plain', 'utf-8')
 	message['From'] = "shihao<shihao1024@163.com>"
