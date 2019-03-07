@@ -1,5 +1,9 @@
 import requests
-token = "637785666:AAHRW-gz-CeKkSGbP_xKubcau0dO28ffBYc"
-print requests.get("https://api.telegram.org/bot<token>/getme".replace("<token>", token))
-url = "https://api.telegram.org/bot<token>/sendMessage?chat_id=@FindSthToEat&text=message"
-print requests.get(url.replace("<token>", token))
+TOKEN = "637785666:AAHRW-gz-CeKkSGbP_xKubcau0dO28ffBYc"
+url = "https://api.telegram.org/bot{}/".format(TOKEN)
+# print requests.get(url +"getme").content
+# print requests.get(url + "getUpdates").content
+def send_message(msg):
+	status = requests.get(url + "sendMessage?chat_id=-1001366507371&text={}".format(msg)).content
+	return status
+print send_message("8 updated, 2 important")
