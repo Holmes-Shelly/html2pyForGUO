@@ -8,7 +8,7 @@ from email.header import Header
 
 url = 'http://ndes.csrc.gov.cn/alappl/home/volunteerLift?edCde=300009'
 last_query = ()
-key_word = u'基金募集'
+key_word = u'基金募集申请'
 
 # main function
 def html_query():
@@ -40,9 +40,9 @@ def send_email(html_tuple, msg_tuple):
 	mail_pass="shihao1992"   #口令
 
 	sender = 'shihao1024@163.com'
-	receivers = ['marygmd123@163.com', 'shihao1024@163.com', 'shihao06@gmail.com']  # 接收邮件
-	subject = "csrc.gov.cn: "+str(len(html_tuple))+" updated, "+str(len(msg_tuple))+" important."
-	email_content = 'http://ndes.csrc.gov.cn/alappl/home/gongshi'
+	receivers = ['marygmd123@163.com', 'shihao1024@163.com']  # 接收邮件
+	subject = str(len(html_tuple))+" updated, "+str(len(msg_tuple))+" important."
+	email_content = ''
 	content_row = 0
 	for content in msg_tuple:
 		content_row += 1
