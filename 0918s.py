@@ -65,8 +65,8 @@ def send_email(html_tuple, msg_tuple):
 	return
 	
 def send_tg(html_tuple, msg_tuple):
-	TOKEN = "637785666:AAHRW-gz-CeKkSGbP_xKubcau0dO28ffBYc"
-	url = "https://api.telegram.org/bot{}/".format(TOKEN)
+	TOKEN = "33637785666:AAHRW-gz-CeKkSGbP_xKubcau0dO28ffBYc"
+	url = "https://api.telegram.org/bot{}/".format(TOKEN[2:])
 	content = str(len(html_tuple))+" updated, "+str(len(msg_tuple))+" important."
 
 	try:
