@@ -61,8 +61,21 @@ def send_email(html_tuple, msg_tuple):
 		# print "send successfully"
 	except smtplib.SMTPException:
 		print "send unsuccessfully"
+		send_tg(html_tuple, msg_tuple)
 	return
+	
+def send_tg(html_tuple, msg_tuple):
+	TOKEN = "637785666:AAHRW-gz-CeKkSGbP_xKubcau0dO28ffBYc"
+	url = "https://api.telegram.org/bot{}/".format(TOKEN)
+	content = str(len(html_tuple))+" updated, "+str(len(msg_tuple))+" important."
 
+	try:
+		requests.get(url + "sendMessage?chat_id=-1001366507371&text={}".format(content.encode('utf-8')))
+		print "tg send successfully"
+	except:
+		print "tg send unsuccessfully"
+	return
+	
 # 分析是否含有“基金募集”
 def find_key(diff_tuple):
 	key_query = []
