@@ -6,7 +6,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 
-url = 'http://ndes.csrc.gov.cn/alappl/home/volunteerLift?edCde=300009'
+url = 'http://neris.csrc.gov.cn/alappl/home/volunteerLift?edCde=300009'
 last_query = ()
 key_word = u'基金募集申请'
 
