@@ -7,23 +7,24 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 url = 'http://neris.csrc.gov.cn/alappl/home/volunteerLift?edCde=300009'
-last_query = ()
-key_word = u'基金募集申请'
+key_jj = u'基金'
+key_zq = r'.*?证券.*?《.*?基金募集变更.*?'
+last_query = []
 
 # main function
 def html_query():
 	html_response = requests.get(url).content.decode('utf-8')
 	this_query = html_analyze(html_response)
 	
-	global last_query
 	diff_tuple = tuple(set(this_query).difference(set(last_query)))
-	if len(diff_tuple) and len(last_query):
-		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(diff_tuple), "updated."
+	if len(diff_tuple):
 		key_query = find_key(diff_tuple)
+		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(diff_tuple), "updated."
 		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(key_query), "important."
 		send_tg(diff_tuple, key_query)
 		send_email(diff_tuple, key_query)
-	last_query = this_query
+		for content_index in range(len(this_query)):
+			last_query[content_index] = this_query[content_index]
 	return
 
 def html_analyze(content):
@@ -74,9 +75,10 @@ def send_tg(html_tuple, msg_tuple):
 def find_key(diff_tuple):
 	key_query = []
 	for query_content in diff_tuple:
-		if not re.search(key_word, query_content):
+		if not re.search(key_jj, query_content):
 			key_query.append(query_content)
-			# print 'find', type(query_content)
+		elif re.match(key_zq, query_content):
+			key_query.append(query_content)
 	return tuple(key_query)
 	
 def query_cycle():
