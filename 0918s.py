@@ -23,8 +23,10 @@ def html_query():
 		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(key_query), "important."
 		send_tg(diff_tuple, key_query)
 		send_email(diff_tuple, key_query)
-		for content_index in range(len(this_query)):
-			last_query[content_index] = this_query[content_index]
+		for content_index in range(len(last_query)):
+			last_query.pop(-1)
+		for content in this_query:
+			last_query.append(content)
 	return
 
 def html_analyze(content):
