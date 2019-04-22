@@ -99,7 +99,7 @@ def query_cycle():
 		try:
 			print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
 			html_query()
-		except requests.exceptions.ConnectionError, ErrorAlert:
+		except requests.exceptions.ConnectionError as ErrorAlert:
 			print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
 			print(ErrorAlert)
 		time.sleep(time_delay)
