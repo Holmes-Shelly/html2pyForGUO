@@ -19,8 +19,8 @@ def html_query():
 	diff_tuple = tuple(set(this_query).difference(set(last_query)))
 	if len(diff_tuple):
 		key_query = find_key(diff_tuple)
-		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(diff_tuple), "updated."
-		print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(key_query), "important."
+		print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(diff_tuple), "updated.")
+		print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), len(key_query), "important.")
 		send_tg(diff_tuple, key_query)
 		send_email(diff_tuple, key_query)
 		for content_index in range(len(last_query)):
@@ -60,7 +60,7 @@ def send_email(html_tuple, msg_tuple):
 		smtpObj.login(mail_user,mail_pass)
 		smtpObj.sendmail(sender, receivers, message.as_string())
 	except smtplib.SMTPException:
-		print "send unsuccessfully"
+		print("send unsuccessfully.")
 	return
 	
 def send_tg(html_tuple, msg_tuple):
@@ -71,7 +71,7 @@ def send_tg(html_tuple, msg_tuple):
 	try:
 		requests.get(url + "sendMessage?chat_id=-1001366507371&text={}".format(content.encode('utf-8')))
 	except:
-		print "tg send unsuccessfully"
+		print("tg send unsuccessfully.")
 	return
 	
 def find_key(diff_tuple):
@@ -97,11 +97,11 @@ def query_cycle():
 			time_delay = 3600
 
 		try:
-			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+			print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
 			html_query()
 		except requests.exceptions.ConnectionError, ErrorAlert:
-			print time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
-			print ErrorAlert
+			print(time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())))
+			print(ErrorAlert)
 		time.sleep(time_delay)
 	return
 
