@@ -1,4 +1,3 @@
-#-*- coding:utf-8 -*-
 import requests
 import re
 import time
@@ -8,7 +7,7 @@ from email.header import Header
 
 url = 'http://neris.csrc.gov.cn/alappl/home/volunteerLift?edCde=300009'
 key_jj = u'基金'
-key_zq = r'.*?证券.*?《.*?基金募集变更.*?'
+key_zq = r'.*?证券.*?《.*?基金募集.*?'
 last_query = []
 
 # main function
