@@ -40,8 +40,8 @@ def html_query():
 		page_items = re.findall(res, web_resp, re.I|re.S|re.M)
 		if(len(page_items) < 10):
 			file_write(web_resp)
+			print("Interesting.")
 			
-		print(len(page_items))
 		for item in page_items:
 			web_items.append(item)
 		time.sleep(2)
@@ -105,11 +105,11 @@ def find_key(diff_tuple):
 	for query_content in diff_tuple:
 		if re.search(key_jj, query_content):
 			if re.match(key_zq, query_content):
-				print "zhengquan in jijin."
+				print("zhengquan in jijin.")
 				key_query.append(query_content)
 		else:
 			key_query.append(query_content)
-			print "find other thing"
+			print("find other thing.")
 
 	return tuple(key_query)
 	
